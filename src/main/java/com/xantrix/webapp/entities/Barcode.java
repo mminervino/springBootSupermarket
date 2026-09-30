@@ -29,7 +29,7 @@ public class Barcode implements Serializable {
 
     public String getBarcode() {return barcode;}
     public void setBarcode(String barcode) {this.barcode = barcode;}
-    public Articoli getArticoli() {return articolo;}
+    public Articoli getArticolo() {return articolo;}
     public String getIdTipoArt() {return idTipoArt;}
     public void setArticolo(Articoli articolo) {this.articolo = articolo;}
     public void setIdTipoArt(String idTipoArt) {this.idTipoArt = idTipoArt;}

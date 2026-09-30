@@ -124,7 +124,7 @@ public class InsertArtTest
 		mockMvc.perform(MockMvcRequestBuilders.delete("/api/articoli/elimina/123Test")
 				.accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.code").value("200 OK"))
+				.andExpect(jsonPath("$.code").value(200))
 				.andExpect(jsonPath("$.message").value("Eliminazione Articolo 123Test Eseguita Con Successo"))
 				.andDo(print());
 	}

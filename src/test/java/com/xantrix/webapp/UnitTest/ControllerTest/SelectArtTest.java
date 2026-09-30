@@ -50,7 +50,7 @@ private MockMvc mockMvc;
 			"    \"codStat\": \"\",\n" + 
 			"    \"pzCart\": 6,\n" + 
 			"    \"pesoNetto\": 1.5,\n" + 
-			"    \"idStatoArt\": \"1 \",\n" + 
+			"    \"idStatoArt\": \"1\",\n" +
 			"    \"dataCreaz\": \"2010-06-14\",\n" + 
 			"    \"barcode\": [\n" + 
 			"        {\n" + 
@@ -91,7 +91,7 @@ private MockMvc mockMvc;
 				.andExpect(jsonPath("$.pesoNetto").exists())
 				.andExpect(jsonPath("$.pesoNetto").value("1.5"))
 				.andExpect(jsonPath("$.idStatoArt").exists())
-				.andExpect(jsonPath("$.idStatoArt").value("1 "))
+				.andExpect(jsonPath("$.idStatoArt").value("1"))
 				.andExpect(jsonPath("$.dataCreaz").exists())
 				.andExpect(jsonPath("$.dataCreaz").value("2010-06-14"))
 				 //barcode
