@@ -2,15 +2,15 @@ package com.xantrix.webapp.service;
 
 import com.xantrix.webapp.entities.Articoli;
 import com.xantrix.webapp.repository.ArticoliRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
+@RequiredArgsConstructor
 public class ArticoliServiceImpl implements ArticoliService {
-    @Autowired
-    ArticoliRepository articoliRepository;
+    private final ArticoliRepository articoliRepository;
 
     @Override
     public Iterable<Articoli> SelTutti(){

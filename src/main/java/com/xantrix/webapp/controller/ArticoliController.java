@@ -2,6 +2,7 @@ package com.xantrix.webapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.boot.autoconfigure.graphql.GraphQlProperties;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.context.support.ResourceBundleMessageSource;
@@ -12,9 +13,9 @@ import com.xantrix.webapp.exception.DuplicateException;
 import com.xantrix.webapp.service.ArticoliService;
 import com.xantrix.webapp.service.BarcodeService;
 import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -29,17 +30,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/articoli")
+@RequiredArgsConstructor
 public class ArticoliController {
 
     private static Logger logger = LoggerFactory.getLogger(ArticoliController.class);
-    @Autowired
-    private ArticoliService articoliService;
-    @Autowired
-    private BarcodeService barcodeService;
+    private final ArticoliService articoliService;
+    private final BarcodeService barcodeService;
 
-    @Autowired
-    private ResourceBundleMessageSource errMessage;
+    private final ResourceBundleMessageSource errMessage;
 
+    @Operation(summary = "Ricerca per Barcode", description = "restituisce un JSON")
     @RequestMapping(value = "cerca/ean/{barcode}", method = RequestMethod.GET, produces = "application/json" )
     public ResponseEntity<Articoli> ListArtByEan(@PathVariable("barcode") String barcode) throws NotFoundException {
 
@@ -56,6 +56,8 @@ public class ArticoliController {
         return new ResponseEntity<Articoli>(articolo,HttpStatus.OK);
 
     }
+
+    @Operation(summary = "Ricerca per codice articolo", description = "restituisce un JSON")
     @RequestMapping(value = "/cerca/codice/{codart}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<Articoli> ListArtByCod(@PathVariable("codart") String codart) throws NotFoundException{
 
@@ -72,6 +74,7 @@ public class ArticoliController {
         return new ResponseEntity<Articoli>(articolo,HttpStatus.OK);
     }
 
+    @Operation(summary = "Ricerca per descrizione", description = "restituisce un JSON")
     @RequestMapping(value = "cerca/descrizione/{descrizione}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Articoli>>  ListArtByDesc(@PathVariable("descrizione") String descrizione) throws NotFoundException{
         logger.info("****** cerco  l'articolo dal descrizione: " + descrizione);
@@ -85,6 +88,10 @@ public class ArticoliController {
 
     }
 
+    @Operation(
+            summary = "Ricerca per descrizione con paginazione",
+            description = "restituisce un JSON"
+    )
     @RequestMapping(value = "cerca/descrizione/{descrizione}/{page}/{rows}", method = RequestMethod.GET, produces = "application/json")
     public ResponseEntity<List<Articoli>>  ListArtByDesc(@PathVariable("descrizione") String descrizione, @PathVariable("page") int pageNum,@PathVariable("rows") int RecXPage)  throws NotFoundException{
         logger.info("****** cerco  l'articolo dal descrizione: " + descrizione);
@@ -101,6 +108,8 @@ public class ArticoliController {
         return new ResponseEntity<List<Articoli>>(articoli,HttpStatus.OK);
 
     }
+
+    @Operation(summary = "Inserisce un nuovo elemento", description = "restituisce un JSON")
     @RequestMapping(value = "/inserisci", method = RequestMethod.POST)
     public ResponseEntity<Articoli> createArt(@Valid @RequestBody Articoli articolo, BindingResult bindingResult,
                                               UriComponentsBuilder ucBuilder)

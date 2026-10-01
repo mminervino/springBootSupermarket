@@ -2,13 +2,13 @@ package com.xantrix.webapp.service;
 
 import com.xantrix.webapp.entities.Barcode;
 import com.xantrix.webapp.repository.BarcodeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class BarcodeServiceImp implements BarcodeService{
-    @Autowired
-    BarcodeRepository barcodeRepository;
+    private final BarcodeRepository barcodeRepository;
     @Override
     public Barcode SelByBarcode(String Barcode){
 

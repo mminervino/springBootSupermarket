@@ -6,20 +6,19 @@ import com.xantrix.webapp.Application;
 import com.xantrix.webapp.entities.Barcode;
 import com.xantrix.webapp.repository.BarcodeRepository;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.TestConstructor;
+import org.junit.jupiter.api.Test;
 
-@RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = Application.class)
 @SpringBootTest
+@TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
+@RequiredArgsConstructor
 public class BarcodeRepositoryTest
 {
-	@Autowired
-	private BarcodeRepository barcodeRepository;
+	private final BarcodeRepository barcodeRepository;
 	
 	
 	@Test
