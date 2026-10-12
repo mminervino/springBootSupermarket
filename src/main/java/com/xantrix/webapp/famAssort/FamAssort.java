@@ -1,15 +1,11 @@
-package com.xantrix.webapp.entities;
+package com.xantrix.webapp.famAssort;
 
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import com.xantrix.webapp.articoli.Articoli;
+import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -34,5 +30,8 @@ public class FamAssort implements Serializable
     //@JsonBackReference
     @JsonIgnore
     private Set<Articoli> articoli = new HashSet<>();
+
+    @Version
+    private long version;
 
 }

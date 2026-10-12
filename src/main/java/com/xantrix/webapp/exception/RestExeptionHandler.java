@@ -2,6 +2,7 @@ package com.xantrix.webapp.exception;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
@@ -51,4 +52,14 @@ public class RestExeptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<ErrorResponse>(errore, HttpStatus.BAD_REQUEST);
 
     }
+    @ExceptionHandler(ObjectOptimisticLockingFailureException.class)
+    public ResponseEntity<ErrorResponse>  exceptionHandler(ObjectOptimisticLockingFailureException ex)
+    {
+        ErrorResponse errore = new ErrorResponse();
+        errore.setCodice(HttpStatus.CONFLICT.value());
+        errore.setMessaggio(ex.getMessage() + " la versione non corrisponde");
+        return new ResponseEntity<>(errore, new HttpHeaders(), HttpStatus.CONFLICT);
+    }
+
+
 }

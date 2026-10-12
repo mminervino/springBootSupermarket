@@ -2,34 +2,35 @@ package com.xantrix.webapp.entities;
 
 import java.io.Serializable;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import com.xantrix.webapp.articoli.Articoli;
+import jakarta.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Entity
 @Table(name = "INGREDIENTI")
-@Data
 public class Ingredienti implements Serializable
 {
     private static final long serialVersionUID = -6230810713799336046L;
 
     @Id
-    @Column(name = "CODART")
+    @Column(name = "CODART",length = 20)
     private String codArt;
 
-    @Column(name = "INFO")
+    @Column(name = "INFO",length = 300)
+    @Size(min = 1, max = 300)
     private String info;
 
     @OneToOne
     @PrimaryKeyJoinColumn
     @JsonIgnore
     private Articoli articolo;
+
+
+    @Version
+    private long version;
 
 }

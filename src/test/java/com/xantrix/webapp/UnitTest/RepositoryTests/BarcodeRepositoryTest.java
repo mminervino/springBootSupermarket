@@ -3,8 +3,8 @@ package com.xantrix.webapp.UnitTest.RepositoryTests;
 import static org.assertj.core.api.Assertions.assertThat;
  
 import com.xantrix.webapp.Application;
-import com.xantrix.webapp.entities.Barcode;
-import com.xantrix.webapp.repository.BarcodeRepository;
+import com.xantrix.webapp.barcode.Barcode;
+import com.xantrix.webapp.barcode.BarcodeRepository;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.test.context.SpringBootTest;
